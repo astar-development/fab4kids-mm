@@ -67,18 +67,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EDB5EC0904FA44F2A5C6D391165DA8BE }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A2617AD60D1B4B0BABDD934C7142C0C7 }}
 
-      - name: Configure startup command in App Service
-        run: |
-          RESOURCE_GROUP=$(az webapp list --query "[?name=='fab4kids-mm'].resourceGroup | [0]" -o tsv)
-          if [ -z "$RESOURCE_GROUP" ]; then
-            echo "Could not determine resource group for app 'fab4kids-mm'"
-            exit 1
-          fi
-          az webapp config set \
-            --name fab4kids \
-            --resource-group "$RESOURCE_GROUP" \
-            --startup-file "pm2 serve /home/site/wwwroot --no-daemon --spa"
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
