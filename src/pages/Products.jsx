@@ -106,9 +106,13 @@ const Products = () => {
           </div>
           
           {sortedProducts.length > 0 ? (
-            <div className="grid">
-              {sortedProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+            <div className="grid chaos-grid">
+              {sortedProducts.map((product, index) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  variant={`chaos-${index % 5}`}
+                />
               ))}
             </div>
           ) : (

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './ProductCard.css';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, variant = 'chaos-0' }) => {
   const { addToCart } = useCart();
   const isDigital = product.category === 'Worksheet Packs' || product.name.includes('(Digital)');
 
@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Link to={`/product/${product.id}`} className="product-card">
+    <Link to={`/product/${product.id}`} className={`product-card ${variant}`}>
       <div className="product-image-wrapper">
         <img src={product.image} alt={product.name} className="product-image" />
         {!product.inStock && <span className="out-of-stock-badge">Out of Stock</span>}
